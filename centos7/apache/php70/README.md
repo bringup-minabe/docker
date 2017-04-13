@@ -32,20 +32,38 @@
 
 ## Amazon ECS 使用時
 
+### ES2
+
+マウントに必要な以下ディレクトリをES2側にも作成
+
+     /var/www/html
+
+     /etc/httpd/user_conf.d/
+
+     /home/ec2-user/docker_data/.ssh
+
+/home/ec2-user/docker_data/.ssh にconfigと鍵を追加後、権限設定
+
+    $ sudo chmod -R 755 /home/ec2-user/docker_data/.ssh/
+
 ### ECS
 
-* イメージOSがCenOSの場合はタスク定義（JSON）で「privileged」を「true」に設定
+イメージOSがCenOSの場合はタスク定義（JSON）で「privileged」を「true」に設定
 
-* 以下VOLUME設定、マウント設定
+以下VOLUME設定、mountPoints設定
+
+VOLUME
 
     /var/www/html
 
     /etc/httpd/user_conf.d/
 
-### ES2
+    /home/ec2-user/docker_data/.ssh
 
-* マウントに必要な以下ディレクトリをES2側にも作成
+mountPoints
 
-     /var/www/html
+    /var/www/html
 
-     /etc/httpd/user_conf.d/
+    /etc/httpd/user_conf.d/
+
+    /home/deployer/.ssh/
