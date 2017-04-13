@@ -1,23 +1,4 @@
 FROM centos:7
-MAINTAINER KAZUHISA MINABE
-
-
-#
-# 環境設定
-#
-
-# APP URL
-ENV APP_URL example.com
-
-# APP PATH
-ENV APP_PATH_MASTER /var/www/html/master/
-ENV APP_PATH_STAGING /var/www/html/staging/
-ENV APP_PATH_DEVELOPMENT /var/www/html/development/
-
-
-#
-# 以下変更必要なし
-#
 
 # update yum
 RUN yum update -y
