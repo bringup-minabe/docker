@@ -34,17 +34,28 @@
 
 ### ES2
 
+deployerユーザー追加 id1000指定
+
+    $ adduser -u 1000 deployer
+    $ groupmod -g 1000 deployer
+
 マウントに必要な以下ディレクトリをES2側にも作成
 
-     /var/www/html
+    $ sudo mkdir /var/docker_volumes/www/
 
-     /etc/httpd/user_conf.d/
+    $ sudo mkdir /var/docker_volumes/www/html
 
-     /home/ec2-user/docker_data/.ssh
+    $ sudo mkdir /var/docker_volumes/httpd/user_conf.d/
 
-/home/ec2-user/docker_data/.ssh にconfigと鍵を追加後、権限設定
+    $ sudo mkdir /var/docker_volumes/httpd/logs/
 
-    $ sudo chmod -R 755 /home/ec2-user/docker_data/.ssh/
+/home/deployer/.ssh にconfigと鍵を追加後、権限設定
+
+    $ sudo chmod 600 /home/deployer/.ssh/keyファイル
+
+/var/www/html/ に権限設定
+
+    $ sudo chown -R deployer:deployer /var/docker_volumes/www/
 
 ### ECS
 
@@ -54,16 +65,20 @@
 
 VOLUME
 
-    /var/www/html
+    /var/docker_volumes/www/
 
-    /etc/httpd/user_conf.d/
+    /var/docker_volumes/httpd/user_conf.d/
 
-    /home/ec2-user/docker_data/.ssh
+    /var/docker_volumes/httpd/logs/
+
+    /home/deployer/.ssh/
 
 mountPoints
 
-    /var/www/html
+    /var/www/
 
     /etc/httpd/user_conf.d/
+
+    /etc/httpd/logs/
 
     /home/deployer/.ssh/

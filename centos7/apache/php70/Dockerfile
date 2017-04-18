@@ -1,5 +1,8 @@
 FROM centos:7
 
+# linux date
+RUN \cp -f /usr/share/zoneinfo/Japan /etc/localtime
+
 # update yum
 RUN yum update -y
 
@@ -38,11 +41,8 @@ ADD httpd/user.conf /etc/httpd/user_conf.d/
 ADD /etc/sudoers.d/deployer /etc/sudoers.d/
 
 # Configure apache
-RUN adduser deployer
+RUN adduser -u 1000 deployer
 RUN chown -R deployer:deployer /var/www
-
-# linux date
-RUN \cp -f /usr/share/zoneinfo/Japan /etc/localtime
 
 # deployer
 RUN mkdir /home/deployer/.ssh
