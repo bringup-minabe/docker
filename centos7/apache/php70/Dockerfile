@@ -37,7 +37,6 @@ RUN echo IncludeOptional user_conf.d/*.conf >> /etc/httpd/conf/httpd.conf
 
 # ADD php.ini and apache conf and sudoers
 ADD php/user.ini /etc/php.d/
-ADD httpd/user.conf /etc/httpd/user_conf.d/
 ADD /etc/sudoers.d/deployer /etc/sudoers.d/
 
 # Configure apache
