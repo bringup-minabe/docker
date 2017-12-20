@@ -1,0 +1,22 @@
+version: '2'
+services:
+  db:
+    build: ./mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: pass
+    ports:
+      - '3306:3306'
+    volumes:
+      - db:/var/lib/mysql
+    privileged: true
+  httpd:
+    build: ./httpd
+    ports:
+      - '8080:80'
+    volumes:
+      - /Applications/MAMP/htdocs:/var/www/html
+    depends_on:
+      - db
+    privileged: true
+volumes:
+  db:
