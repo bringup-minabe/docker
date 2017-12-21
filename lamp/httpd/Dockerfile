@@ -54,7 +54,7 @@ ADD php/user.ini /etc/php.d/
 ADD php/user.ini /etc/opt/remi/php72/php.d/
 ADD php/user.ini /etc/opt/remi/php71/php.d/
 ADD php/user.ini /etc/opt/remi/php70/php.d/
-ADD php/user.ini /opt/remi/php56/root/etc/
+ADD php/user.ini /opt/remi/php56/root/etc/php.d/
 
 # start service
 ADD /shell/startService.sh /

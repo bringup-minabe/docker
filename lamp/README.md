@@ -4,7 +4,7 @@
 
 * CentOS7
 * Apache2
-* PHP7.2
+* PHP 5.6, 7.0, 7.1, 7.2
 * git
 * node
 * npm
