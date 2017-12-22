@@ -8,7 +8,6 @@
 * git
 * node
 * npm
-* composer
 
 ## PHPバージョン切り替え
 
