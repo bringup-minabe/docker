@@ -17,6 +17,9 @@ RUN yum-config-manager --enable remi
 # httpd
 RUN yum install -y httpd
 
+# ssmtp mailutils
+RUN yum install -y ssmtp mailutils
+
 # php install ver 56, 70, 71, 72
 # https://qiita.com/bezeklik/items/860ba080bf4c664cd8e9
 
@@ -55,6 +58,10 @@ ADD php/user.ini /etc/opt/remi/php72/php.d/
 ADD php/user.ini /etc/opt/remi/php71/php.d/
 ADD php/user.ini /etc/opt/remi/php70/php.d/
 ADD php/user.ini /opt/remi/php56/root/etc/php.d/
+
+# Change ssmtp.conf
+RUN echo mailhub=smtp:1025 >> /etc/ssmtp/ssmtp.conf
+RUN echo FromLineOverride=YES >> /etc/ssmtp/ssmtp.conf
 
 # start service
 ADD /shell/startService.sh /
