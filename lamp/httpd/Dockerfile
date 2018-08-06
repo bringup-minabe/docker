@@ -41,6 +41,13 @@ RUN yum -y install git
 # node npm
 RUN yum -y --enablerepo=epel install nodejs npm
 
+# python 3.5
+RUN yum install -y https://centos7.iuscommunity.org/ius-release.rpm
+RUN yum install -y python35u python35u-libs python35u-devel python35u-pip
+RUN /bin/python3.5 -m pip install chardet
+RUN /bin/python3.5 -m pip install pandas
+RUN /bin/python3.5 -m pip install numpy==1.14.4
+
 # sudo 
 RUN yum -y install sudo
 
