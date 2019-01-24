@@ -23,7 +23,7 @@ RUN yum install -y ssmtp mailutils
 # php install ver 56, 70, 71, 72, 73
 # https://qiita.com/bezeklik/items/860ba080bf4c664cd8e9
 
-RUN for v in 56 70 71 72 73 ; do yum -y install php$v php$v-php-{cli,common,devel,mysql,mcrypt,mbstring,fpm,gd,intl,json,mysqlnd,pdo,pecl-imagick,pecl-imagick-devel,pecl-mysql,pecl-zip,opcache,pecl-apcu,pecl-memcached,xml} ; done
+RUN for v in 56 70 71 72 73 ; do yum -y install php$v php$v-php-{cli,common,devel,mysql,mcrypt,mbstring,fpm,gd,intl,json,mysqlnd,pdo,pecl-imagick,pecl-imagick-devel,pecl-mysql,pecl-zip,opcache,pecl-apcu,pecl-memcached,xml,pgsql} ; done
 
 RUN for v in 56 70 71 72 73 ; do yum -y install php$v-php-fpm ; done
 RUN for v in 56 ; do sed -i '/pm = /s/dynamic/ondemand/' /opt/remi/php$v/root/etc/php-fpm.d/www.conf ; done
