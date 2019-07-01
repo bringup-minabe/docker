@@ -1,0 +1,40 @@
+version: '2'
+services:
+  db:
+    build: ./mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: pass
+    ports:
+      - '3306:3306'
+    volumes:
+      - db:/var/lib/mysql
+    privileged: true
+  postgres:
+    build: ./postgres
+    environment:
+      - "POSTGRES_USER=postgres"
+      - "POSTGRES_PASSWORD=mysecretpassword1234"
+    ports:
+      - '6432:5432'
+    volumes:
+      - pgsql-data:/var/lib/postgresql/data
+      - ./sql/postgres/initdb.d:/docker-entrypoint-initdb.d
+    privileged: true
+  httpd:
+    build: ./httpd
+    ports:
+      - '8080:80'
+    volumes:
+      - /Applications/MAMP/htdocs:/var/www/html
+    depends_on:
+      - db
+    privileged: true
+  smtp:
+    image: schickling/mailcatcher
+    ports:
+      - "1080:1080"
+      - "1025:1025"
+volumes:
+  db:
+  pgsql-data:
+    driver: local
