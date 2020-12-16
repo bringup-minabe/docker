@@ -52,6 +52,20 @@ ADD php/php.ini /etc/
 ADD /shell/startService.sh /
 RUN chmod 755 /startService.sh
 
+# install openssl
+RUN yum install -y zlib-devel perl-core make gcc
+RUN curl https://www.openssl.org/source/openssl-1.1.1.tar.gz -o /usr/local/src/openssl-1.1.1.tar.gz
+RUN tar xvzf /usr/local/src/openssl-1.1.1.tar.gz
+RUN openssl-1.1.1/config --prefix=/usr/local/openssl-1.1.1 shared zlib
+RUN cd openssl-1.1.1/
+RUN make depend
+RUN make
+RUN make test
+RUN make install
+RUN echo /usr/local/openssl-1.1.1/lib > /etc/ld.so.conf.d/openssl-1.1.1.conf
+RUN sudo ldconfig
+RUN yum install -y openssl
+
 ENTRYPOINT ["/startService.sh"]
 
 CMD ["bash"]
