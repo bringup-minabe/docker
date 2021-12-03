@@ -50,6 +50,9 @@ RUN yum -y install git
 # node npm
 RUN yum -y --enablerepo=epel install nodejs npm
 
+# unzip
+RUN yum -y install unzip
+
 # python 3.5
 # RUN yum install -y https://centos7.iuscommunity.org/ius-release.rpm
 # RUN yum install -y python35u python35u-libs python35u-devel python35u-pip
