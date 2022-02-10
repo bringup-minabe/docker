@@ -23,14 +23,14 @@ RUN yum install -y ssmtp mailutils
 # php install ver 56, 70, 71, 72, 73 74
 # https://qiita.com/bezeklik/items/860ba080bf4c664cd8e9
 
-RUN for v in 56 70 71 72 73 74 ; do yum -y install php$v php$v-php-{cli,common,devel,mysql,mcrypt,mbstring,fpm,gd,intl,json,mysqlnd,pdo,pecl-imagick,pecl-imagick-devel,pecl-mysql,pecl-zip,opcache,pecl-apcu,pecl-memcached,xml,pgsql} ; done
+RUN for v in 56 70 71 72 73 74 80 ; do yum -y install php$v php$v-php-{cli,common,devel,mysql,mcrypt,mbstring,fpm,gd,intl,json,mysqlnd,pdo,pecl-imagick,pecl-imagick-devel,pecl-mysql,pecl-zip,opcache,pecl-apcu,pecl-memcached,xml,pgsql} ; done
 
-RUN for v in 56 70 71 72 73 74 ; do yum -y install php$v-php-fpm ; done
+RUN for v in 56 70 71 72 73 74 80 ; do yum -y install php$v-php-fpm ; done
 RUN for v in 56 ; do sed -i '/pm = /s/dynamic/ondemand/' /opt/remi/php$v/root/etc/php-fpm.d/www.conf ; done
-RUN for v in 70 71 72 73 74 ; do sed -i '/pm = /s/dynamic/ondemand/' /etc/opt/remi/php$v/php-fpm.d/www.conf ; done
+RUN for v in 70 71 72 73 74 80 ; do sed -i '/pm = /s/dynamic/ondemand/' /etc/opt/remi/php$v/php-fpm.d/www.conf ; done
 RUN for v in 56 ; do sed -i "s/9000/90$v/" /opt/remi/php$v/root/etc/php-fpm.d/www.conf ; done
-RUN for v in 70 71 72 73 74 ; do sed -i "s/9000/90$v/" /etc/opt/remi/php$v/php-fpm.d/www.conf ; done
-RUN for v in 56 70 71 72 73 74 ; do systemctl start php$v-php-fpm ; systemctl enable php$v-php-fpm ; done
+RUN for v in 70 71 72 73 74 80 ; do sed -i "s/9000/90$v/" /etc/opt/remi/php$v/php-fpm.d/www.conf ; done
+RUN for v in 56 70 71 72 73 74 80 ; do systemctl start php$v-php-fpm ; systemctl enable php$v-php-fpm ; done
 
 # modules
 RUN yum -y install environment-modules
@@ -68,6 +68,8 @@ ADD user.conf /etc/httpd/user_conf.d/
 
 # ADD php.ini and apache conf
 ADD php/user.ini /etc/php.d/
+ADD php/user.ini /etc/opt/remi/php80/php.d/
+ADD php/user.ini /etc/opt/remi/php74/php.d/
 ADD php/user.ini /etc/opt/remi/php73/php.d/
 ADD php/user.ini /etc/opt/remi/php72/php.d/
 ADD php/user.ini /etc/opt/remi/php71/php.d/
