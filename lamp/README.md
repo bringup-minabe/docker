@@ -18,3 +18,27 @@
     の「90**」を希望バージョンに書き換え
 
     $ systemctl restart httpd
+
+## サブドメインでの環境指定
+
+    $ docker exec -it lamp_httpd_1 bash
+    $ vi /etc/httpd/user_conf.d/user.conf
+
+    <VirtualHost *:80>
+
+        DocumentRoot /var/www/html/example/site
+
+        ServerName example.localhost
+
+        <FilesMatch \.php$>
+            SetHandler "proxy:fcgi://127.0.0.1:9080"
+        </FilesMatch>
+
+        <Directory "/var/www/html">
+            Options All
+            AllowOverride All
+            Order Allow,Deny
+            Allow from all
+        </Directory>
+
+    </VirtualHost>
