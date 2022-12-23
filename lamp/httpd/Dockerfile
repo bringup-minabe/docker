@@ -1,4 +1,4 @@
-FROM centos:7
+FROM --platform=linux/x86_64/v8 centos:7
 
 # linux date
 RUN \cp -f /usr/share/zoneinfo/Japan /etc/localtime
